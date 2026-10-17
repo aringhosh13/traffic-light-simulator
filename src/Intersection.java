@@ -1,16 +1,19 @@
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 
 public class Intersection {
     private final Queue<Car> queue;
     private final TrafficLight light;
+    private final Random random;
     private int carIdCounter;
     private int totalWaitTime;
     private int totalCarsServed;
 
-    public Intersection(int baseGreenTime) {
+    public Intersection(int baseGreenTime, long seed) {
         this.queue = new LinkedList<>();
         this.light = new TrafficLight(baseGreenTime);
+        this.random = new Random(seed); // Guarantees identical vehicle arrival timelines across runs
         this.carIdCounter = 1;
         this.totalWaitTime = 0;
         this.totalCarsServed = 0;
@@ -21,7 +24,8 @@ public class Intersection {
         int cycleTimer = 0;
 
         for (int time = 0; time < totalSeconds; time++) {
-            if (Math.random() < spawnProbability) {
+            // Evaluates pseudo-random arrivals against fixed seed
+            if (random.nextDouble() < spawnProbability) {
                 queue.add(new Car(carIdCounter++, time));
             }
 
