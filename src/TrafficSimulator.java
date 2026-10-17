@@ -3,14 +3,16 @@ public class TrafficSimulator {
         int simulationDuration = 3600; 
         int baseGreen = 30;            
         double peakSpawnRate = 0.65;   
+        long seed = 42; // Constant seed for baseline benchmark reproducibility
 
-        Intersection fixedIntersection = new Intersection(baseGreen);
+        // Both intersections process identical car spawn sequences
+        Intersection fixedIntersection = new Intersection(baseGreen, seed);
         double avgWaitFixed = fixedIntersection.runSimulation(simulationDuration, false, peakSpawnRate);
 
-        Intersection dynamicIntersection = new Intersection(baseGreen);
+        Intersection dynamicIntersection = new Intersection(baseGreen, seed);
         double avgWaitDynamic = dynamicIntersection.runSimulation(simulationDuration, true, peakSpawnRate);
 
-        System.out.println("=== TRAFFIC LIGHT QUEUE SIMULATION RESULTS ===");
+        System.out.println("=== REPRODUCIBLE TRAFFIC QUEUE SIMULATION RESULTS ===");
         System.out.printf("Fixed Timing Avg Wait Time   : %.2f seconds\n", avgWaitFixed);
         System.out.printf("Dynamic Timing Avg Wait Time : %.2f seconds\n", avgWaitDynamic);
 
