@@ -1,6 +1,6 @@
 # Traffic simulator screenshots
 
-Each screenshot shows one run of the simulator. The duration (1 hour), green time (30 seconds), and random seed (42) stay the same. The arrival probability changes.
+These full-screen desktop screenshots are 1536 × 960 pixels. Each shows one run of the simulator. The duration (1 hour), green time (30 seconds), and random seed (42) stay the same. The arrival probability changes.
 
 | Traffic | Arrival probability | Fixed average wait | Adaptive average wait | Wait reduction |
 | --- | ---: | ---: | ---: | ---: |
