@@ -8,7 +8,7 @@ Each screenshot shows one run of the simulator. The duration (1 hour), green tim
 | Moderate | 0.45 | 14.2 seconds | 11.5 seconds | 19.0% |
 | Peak | 0.65 | 415.2 seconds | 220.5 seconds | 46.9% |
 
-The waits are averages for cars that passed the light. The screenshot also shows how many cars are still waiting when the hour ends. Both timing rules get the same arrivals for each run.
+The waits are averages for cars that passed the light. The screenshot also shows how many cars are still waiting when the hour ends. Both timing rules get the same arrivals for each run. At 0.65 arrivals per second, the queue continues to grow, since the arrival rate is above the fixed light's maximum service rate.
 
 ## Light traffic
 
