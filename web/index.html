@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Traffic Light Simulator</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>Traffic Light Simulator</h1>
+    <p>A comparison of fixed and adaptive traffic lights.</p>
+
+    <form id="settings">
+      <fieldset>
+        <legend>Settings</legend>
+        <div class="controls">
+          <label for="duration">Simulation time
+            <select id="duration" name="duration">
+              <option value="600">10 minutes</option>
+              <option value="1800">30 minutes</option>
+              <option value="3600" selected>1 hour</option>
+              <option value="7200">2 hours</option>
+            </select>
+          </label>
+          <label for="rate">Arrival probability
+            <input id="rate" name="rate" type="number" min="0" max="1" step="0.01" value="0.45" required>
+          </label>
+          <label for="green">Green time (seconds)
+            <input id="green" name="green" type="number" min="5" max="120" value="30" required>
+          </label>
+          <label for="seed">Random seed
+            <input id="seed" name="seed" type="number" min="0" max="2147483647" value="42" required>
+          </label>
+        </div>
+        <p class="note">Arrival probability is the chance of a car arriving each second (0 to 1). Use 0.65 for heavy traffic. The same seed repeats the same arrivals.</p>
+        <button id="run" type="submit">Run simulation</button>
+        <button type="reset">Reset</button>
+        <p id="form-status" role="status" aria-live="polite"></p>
+      </fieldset>
+    </form>
+
+    <p><b>Timing rule:</b> Both lights use 30 seconds of red. The adaptive light adds 10 seconds of green if more than 10 cars are waiting when green begins.</p>
+
+    <section aria-labelledby="results-title">
+      <h2 id="results-title">Results</h2>
+      <p id="run-caption" class="note">Loading simulation...</p>
+      <table>
+        <thead>
+          <tr><th scope="col">Measurement</th><th scope="col">Fixed timing</th><th scope="col">Adaptive timing</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Average waiting time (seconds)</th><td id="fixed-wait">-</td><td id="adaptive-wait">-</td></tr>
+        </tbody>
+        <tbody id="result-rows">
+          <tr><td colspan="3">Loading results...</td></tr>
+        </tbody>
+      </table>
+      <p><span id="difference-label">Average wait reduction</span>: <b id="reduction">-</b><span id="difference-note"></span></p>
+      <p class="note">These results cover the whole run. Average and longest waits include only cars that passed the light. Cars left waiting are counted separately.</p>
+      <button id="export" type="button" disabled>Save results (CSV)</button>
+    </section>
+
+    <section aria-labelledby="playback-title">
+      <h2 id="playback-title">Simulation playback</h2>
+      <div class="roads">
+        <div class="road-panel">
+          <h3>Fixed timing <span id="fixed-signal">Ready</span></h3>
+          <canvas id="fixed-road" role="img" aria-label="Fixed timing queue"></canvas>
+          <p><b id="fixed-queue">0</b> waiting | <b id="fixed-served">0</b> passed</p>
+          <p id="fixed-cycle" class="note">30s green / 30s red</p>
+        </div>
+        <div class="road-panel">
+          <h3>Adaptive timing <span id="adaptive-signal">Ready</span></h3>
+          <canvas id="adaptive-road" role="img" aria-label="Adaptive timing queue"></canvas>
+          <p><b id="adaptive-queue">0</b> waiting | <b id="adaptive-served">0</b> passed</p>
+          <p id="adaptive-cycle" class="note">30s green / 30s red</p>
+        </div>
+      </div>
+      <div class="playback-controls">
+        <button id="play" type="button" disabled>Play</button>
+        <output id="elapsed" for="timeline">00:00</output>
+        <input type="range" id="timeline" min="0" max="3599" value="0" step="1" aria-label="Playback time in seconds" disabled>
+        <span id="total-time">60:00</span>
+        <label for="speed">Speed</label>
+        <select id="speed">
+          <option value="4">4x</option>
+          <option value="16">16x</option>
+          <option value="60" selected>60x</option>
+          <option value="120">120x</option>
+        </select>
+      </div>
+      <p class="note">The drawing shows up to 10 cars. The numbers include all cars in the queue.</p>
+    </section>
+
+    <section aria-labelledby="chart-title">
+      <h2 id="chart-title">Cars waiting over time</h2>
+      <p class="legend"><span class="fixed-label">--- Fixed timing</span> <span class="adaptive-label">— Adaptive timing</span></p>
+      <canvas id="queue-chart" role="img" aria-label="Graph of cars waiting over time"></canvas>
+      <p class="note">Horizontal axis: time in minutes. Vertical axis: cars waiting.</p>
+      <p id="chart-note" class="note"></p>
+    </section>
+
+    <p class="note">This is a simplified model with one queue and one car passing per green second. It does not include cross traffic or turning cars. Both runs use the same arrivals.</p>
+  </main>
+</body>
+</html>

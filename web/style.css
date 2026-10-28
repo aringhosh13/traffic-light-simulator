@@ -1,0 +1,202 @@
+body {
+  margin: 24px;
+  color: #222;
+  background: white;
+  font: 14px Arial, sans-serif;
+  line-height: 1.5;
+}
+
+main {
+  max-width: 900px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: 4px;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 24px 0 8px;
+}
+
+h3 {
+  font-size: 15px;
+}
+
+fieldset {
+  border: 1px solid #aaa;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+legend {
+  font-weight: bold;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.controls label {
+  flex: 1 1 150px;
+}
+
+.controls input,
+.controls select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 4px;
+}
+
+input,
+select,
+button {
+  font: inherit;
+  padding: 5px 8px;
+}
+
+button {
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+:focus-visible {
+  outline: 2px solid #2255aa;
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+.note {
+  color: #555;
+  font-size: 12px;
+}
+
+#form-status {
+  color: #9b2525;
+  font-size: 13px;
+}
+
+#form-status:empty {
+  display: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #bbb;
+  padding: 7px 10px;
+  text-align: right;
+}
+
+thead {
+  background: #eee;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+tbody th {
+  font-weight: normal;
+}
+
+.roads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.road-panel {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.road-panel h3 {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.road-panel h3 span {
+  font-weight: normal;
+}
+
+.green {
+  color: #20703b;
+}
+
+.red {
+  color: #b32b2b;
+}
+
+.road-panel canvas {
+  width: 100%;
+  height: 110px;
+  display: block;
+}
+
+.road-panel p {
+  margin: 4px 0;
+}
+
+.playback-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+#timeline {
+  flex: 1;
+  min-width: 80px;
+  accent-color: #2255aa;
+}
+
+#queue-chart {
+  display: block;
+  width: 100%;
+  height: 200px;
+}
+
+.legend {
+  font-size: 13px;
+}
+
+.fixed-label {
+  color: #2255aa;
+  margin-right: 16px;
+}
+
+.adaptive-label {
+  color: #20703b;
+}
+
+@media (max-width: 500px) {
+  body {
+    margin: 12px;
+  }
+
+  th,
+  td {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  fieldset {
+    padding: 10px;
+  }
+}
